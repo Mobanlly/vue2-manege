@@ -35,7 +35,9 @@
     		...mapState(['adminInfo']),
     	},
 		methods: {
+			// mapActions只是把action函数绑定到methods里面，调里面的方法时正常传参数。
 			...mapActions(['getAdminData']),
+			// 异步请求的一种解决方案
 			async handleCommand(command) {
 				if (command == 'home') {
 					this.$router.push('/manage');

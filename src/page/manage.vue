@@ -39,6 +39,7 @@
 				</el-menu>
 			</el-col>
 			<el-col :span="20" style="height: 100%;overflow: auto;">
+				 <!-- 配合router-view缓存整个路由页面 -->
 				<keep-alive>
 				    <router-view></router-view>
 				</keep-alive>

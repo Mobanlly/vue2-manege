@@ -2,7 +2,29 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
+// webpack使用require.ensure将vue页面打包成独立的chunk文件，
+// 也可以将多个vue页面合并成一个chunk文件，以实现生产环境按需加载。
+/**require.ensure(
+  dependencies: String[],
+  callback: function(require),
+  errorCallback: function(error),
+  chunkName: String
+)
+各个参数含义如下：
 
+1、dependencies：依赖
+
+这是一个字符串数组，通过这个参数，在所有的回调函数代码被执行前，我们可以将所有需要用到的模块进行声明。
+
+2、callback：回调
+
+当所有的依赖都加载完成后，webpack会执行这个回调函数。
+require 对象的一个实现会作为一个参数传递给这个回调函数。
+因此，我们可以进一步 require() 依赖和其它模块提供下一步的执行。
+
+3、errorCallback：错误回调
+
+4、chunkName：chunk名称 */
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
 const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');

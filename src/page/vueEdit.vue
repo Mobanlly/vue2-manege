@@ -20,9 +20,11 @@
     import { quillEditor } from 'vue-quill-editor'
 
     export default {
+        // 富文本编辑器默认内容
         data(){
             return {
                 content: '<h3>文本编辑</h3>',
+                //富文本编辑器配置
 			    editorOption: {
 			        
 		        }
@@ -38,6 +40,7 @@
 	      	}
         },
         methods: {
+            // 准备富文本编辑器
 		    onEditorReady(editor) {
 		        console.log('editor ready!', editor)
 		    },

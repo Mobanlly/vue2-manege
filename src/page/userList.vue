@@ -26,6 +26,8 @@
                 </el-table-column>
             </el-table>
             <div class="Pagination" style="text-align: left;margin-top: 10px;">
+                <!-- size-change	pageSize改变时会触发	回调参数：每页条数 
+             current-change	currentPage 改变时会触发	当前页-->
                 <el-pagination
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"

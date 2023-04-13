@@ -180,17 +180,18 @@
 					promotion_info: '',
 					float_delivery_fee: 5, //运费
 					float_minimum_order_amount: 20, //起价
-					is_premium: true,
-					delivery_mode: true,
-					new: true,
-					bao: true,
-					zhun: true,
-					piao: true,
+					is_premium: true, //品牌保证
+					delivery_mode: true, //蜂鸟专送
+					new: true, //新开店铺
+					bao: true, //外卖保
+					zhun: true, //准时达
+					piao: true, //开发票
+					//营业时间
 					startTime: '',
        	 			endTime: '',
-       	 			image_path: '',
-       	 			business_license_image: '',
-       	 			catering_service_license_image: '',
+       	 			image_path: "", //店铺头像
+					business_license_image: "", //营业执照
+					catering_service_license_image: "", //餐饮服务许可证
 
 		        },
 		        rules: {
@@ -241,6 +242,7 @@
     			try{
     				this.city = await cityGuess();
     				const categories = await foodCategory();
+					//优惠活动的选择
     				categories.forEach(item => {
     					if (item.sub_categories.length) {
     						const addnew = {
@@ -266,7 +268,9 @@
     			}
     		},
     		async querySearchAsync(queryString, cb) {
+				// queryString  input框输入的内容  cb  回调
     			if (queryString) {
+					 //定位城市地址
 	    			try{
 	    				const cityList = await searchplace(this.city.id, queryString);
 	    				if (cityList instanceof Array) {
@@ -274,6 +278,7 @@
 		    					item.value = item.address;
 		    					return item;
 		    				})
+							//显示在输入框上
 		    				cb(cityList)
 	    				}
 	    			}catch(err){
@@ -328,6 +333,7 @@
 		        return '';
 		    },
 		    selectActivity(){
+				// $prompt方法即可打开消息提示
 		    	this.$prompt('请输入活动详情', '提示', {
 		          	confirmButtonText: '确定',
 		          	cancelButtonText: '取消',
@@ -382,6 +388,9 @@
 		    	this.activities.splice(index, 1)
 		    },
 		    submitForm(formName) {
+				// 对整个表单进行校验的方法，参数为一个回调函数。
+				// 该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。
+				// 若不传入回调函数，则会返回一个 promise
 				this.$refs[formName].validate(async (valid) => {
 					if (valid) {
 						Object.assign(this.formData, {activities: this.activities}, {

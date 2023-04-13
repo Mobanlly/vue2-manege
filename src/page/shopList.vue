@@ -166,6 +166,7 @@
                     console.log('获取数据失败', err);
                 }
             },
+            // cascader的获取商铺种类
             async getCategory(){
                 try{
                     const categories = await foodCategory();
@@ -250,6 +251,9 @@
                     console.log('删除店铺失败')
                 }
             },
+            // <!-- autocomplete 是一个可带输入建议的输入框组件，fetch-suggestions
+        //   是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，
+        //   在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。 -->
             async querySearchAsync(queryString, cb) {
                 if (queryString) {
                     try{
@@ -277,6 +281,7 @@
                     this.$message.error('上传图片失败！');
                 }
             },
+            //上传图片验证
             beforeAvatarUpload(file) {
                 const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
                 const isLt2M = file.size / 1024 / 1024 < 2;
@@ -292,6 +297,7 @@
             async updateShop(){
                 this.dialogFormVisible = false;
                 try{
+                    // 该Object.assign()方法将所有可枚举的 自身属性从一个或多个 源对象复制到目标对象。它返回修改后的目标对象
                     Object.assign(this.selectTable, this.address);
                     this.selectTable.category = this.selectedCategory.join('/');
                     const res = await updateResturant(this.selectTable)

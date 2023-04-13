@@ -1,3 +1,4 @@
+// 初始化各组件样式
 body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption {
     padding: 0;
     margin: 0;
@@ -6,8 +7,12 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     text-decoration: none;
     border: none;
     font-family: "Microsoft Yahei",sans-serif;
+    // 能够设置点击链接的时候出现的高亮颜色。
+    // 显示给用户的高光是他们成功点击的标识，以及暗示了他们点击的元素。
     -webkit-tap-highlight-color:transparent;
+    // 抗锯齿
     -webkit-font-smoothing: antialiased;
+    //边框样式
     &:focus {
         outline: none;
     }

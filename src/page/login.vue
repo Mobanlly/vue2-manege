@@ -57,6 +57,7 @@
 		},
 		methods: {
 			...mapActions(['getAdminData']),
+			//表单验证
 			async submitForm(formName) {
 				this.$refs[formName].validate(async (valid) => {
 					if (valid) {

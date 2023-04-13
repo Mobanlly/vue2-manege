@@ -2,6 +2,7 @@
     <div class="fillcontain">
         <head-top></head-top>
         <div class="table_container">
+            <!-- expand-row-keys:可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。 -->
             <el-table
                 :data="tableData"
                 @expand='expand'
@@ -10,6 +11,7 @@
                 style="width: 100%">
                 <el-table-column type="expand">
                   <template slot-scope="props">
+                    <!-- scope.$index→拿到每一行的index scope.$row→拿到每一行的数据 -->
                     <el-form label-position="left" inline class="demo-table-expand">
                       <el-form-item label="食品名称">
                         <span>{{ props.row.name }}</span>
@@ -94,6 +96,11 @@
 						</el-select>
                     </el-form-item>
                     <el-form-item label="食品图片" label-width="100px">
+                          <!-- action	必选参数，上传的地址 -->
+                          <!-- show-file-list	是否显示已上传文件列表 -->
+                          <!-- on-success	文件上传成功时的钩子 -->
+                          <!-- before-upload	上传文件之前的钩子，参数为上传的文件，
+                            若返回 false 或者返回 Promise 且被 reject，则停止上传。 -->
                         <el-upload
                           class="avatar-uploader"
                           :action="baseUrl + '/v1/addimg/food'"
@@ -281,8 +288,11 @@
 				this.specsFormVisible = false;
 			},
 			deleteSpecs(index){
+                // index	必需。整数，指定在什么位置添加/删除项目，使用负值指定从数组末尾开始的位置。
+                // howmany	可选。要删除的项目数。如果设置为 0，则不会删除任何项目。
 				this.specs.splice(index, 1);
 			},
+            //底部页面条
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
@@ -291,6 +301,7 @@
                 this.offset = (val - 1)*this.limit;
                 this.getFoods()
             },
+            //展开详情
             expand(row, status){
             	if (status) {
             		this.getSelectItemData(row)
@@ -309,7 +320,9 @@
                 this.selectTable = {...row, ...{restaurant_name: restaurant.name, restaurant_address: restaurant.address, category_name: category.name}};
 
                 this.selectMenu = {label: category.name, value: row.category_id}
+                // item1, ..., itemX	可选。要添加到数组中的新项目。
                 this.tableData.splice(row.index, 1, {...this.selectTable});
+                // 在下次 DOM 更新循环结束之后执行延迟回调
                 this.$nextTick(() => {
                     this.expendRow.push(row.index);
                 })
@@ -317,6 +330,7 @@
                 	this.getMenu();
                 }
             },
+            //下拉选择框
             handleSelect(index){
             	this.selectIndex = index;
             	this.selectMenu = this.menuOptions[index];
